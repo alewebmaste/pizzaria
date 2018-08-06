@@ -75,4 +75,27 @@ public class ClientesServiceImpl implements ClientesService {
 		return dto;
 	}
 
+	@Override
+	public void inserir(ClientesDto dto) {
+		
+		Clientes cliente = new Clientes();
+		
+		cliente.setNome(dto.getNome());
+		cliente.setEndereco(dto.getEndereco());
+		cliente.setTelefone(dto.getTelefone());
+		cliente.setEmail(dto.getEmail());
+		cliente.setDataNascimento(dto.getDataNascimento());
+		cliente.setCadastro(LocalDate.now());
+		
+		repository.save(cliente);
+		
+	}
+
+	@Override
+	public void deletar(int id) {
+		
+		repository.deleteById(id);
+		
+	}
+
 }

@@ -13,4 +13,8 @@ public interface ClientesService {
 	
 	ClientesDto buscaPorDataNascimento(LocalDate data);
 	
+	void inserir(ClientesDto dto);
+	
+	void deletar(int id);
+	
 }

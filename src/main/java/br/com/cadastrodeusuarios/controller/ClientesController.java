@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +45,20 @@ public class ClientesController {
 		ClientesDto cliente = service.buscaPorDataNascimento(data);
 
 		return cliente;
+	}
+
+	@PutMapping
+	void inserir(@RequestBody ClientesDto dto) {
+
+		service.inserir(dto);
+
+	}
+
+	@DeleteMapping("/{id}")
+	void deletar(@PathVariable int id) {
+		
+		service.deletar(id);
+	
 	}
 
 }
