@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ import lombok.Setter;
 @NamedQuery(name = "Clientes.findAll", query = "SELECT e FROM Clientes e")
 @Getter
 @Setter
+@Builder
 public class Clientes {
 
 	@Id

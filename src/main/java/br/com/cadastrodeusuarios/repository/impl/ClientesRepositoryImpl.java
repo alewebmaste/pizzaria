@@ -10,8 +10,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import br.com.cadastrodeusuarios.domain.entity.Clientes;
 import br.com.cadastrodeusuarios.domain.entity.QClientes;
-import br.com.cadastrodeusuarios.domain.entity.QReembCalendPgto;
-import br.com.cadastrodeusuarios.domain.entity.ReembCalendPgto;
 import br.com.cadastrodeusuarios.repository.custom.ClientesRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 
@@ -21,39 +19,26 @@ public class ClientesRepositoryImpl implements ClientesRepositoryCustom {
 
 	private final EntityManager em;
 	
+	QClientes cliente = QClientes.clientes;
+	
 	@Override
 	public Clientes findByNome(String nome) {
-		
+
 		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-		
-		QClientes cliente = QClientes.clientes;
-		
+
 		Clientes c = queryFactory.selectFrom(cliente).where(cliente.nome.eq(nome)).fetchOne();
-		
+
 		return c;
 	}
 
 	@Override
 	public Clientes findByDataNascimento(LocalDate data) {
+		
 		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-		
-		QClientes cliente = QClientes.clientes;
-		
-		Clientes c = queryFactory.selectFrom(cliente).where(cliente.dataNascimento.eq(data)).fetchOne();
-		
-		return c;
-	}
 
-	@Override
-	public ReembCalendPgto findByDatProcessamento(LocalDate data) {
-		
-		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-		
-		QReembCalendPgto calendario = QReembCalendPgto.reembCalendPgto;
-		
-		ReembCalendPgto rcp = queryFactory.selectFrom(calendario).where(calendario.datProcessamento.eq(data)).fetchOne();
-		
-		return rcp;
+		Clientes c = queryFactory.selectFrom(cliente).where(cliente.dataNascimento.eq(data)).fetchOne();
+
+		return c;
 	}
 
 }

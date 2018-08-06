@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class ClientesDto {
 
 	private int id;
@@ -18,5 +20,7 @@ public class ClientesDto {
 	private String email;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate cadastro;
 
 }

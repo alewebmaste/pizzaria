@@ -7,11 +7,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
-import br.com.cadastrodeusuarios.domain.dto.ReembCalendPgtoDto;
 import br.com.cadastrodeusuarios.domain.entity.Clientes;
-import br.com.cadastrodeusuarios.domain.entity.ReembCalendPgto;
 import br.com.cadastrodeusuarios.repository.ClientesRepository;
 import br.com.cadastrodeusuarios.service.ClientesService;
+import br.com.cadastrodeusuarios.util.ClientesConverter;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -29,15 +28,7 @@ public class ClientesServiceImpl implements ClientesService {
 
 		for (Clientes c : todosClientes) {
 
-			ClientesDto cliente = new ClientesDto();
-
-			cliente.setId(c.getId());
-			cliente.setNome(c.getNome());
-			cliente.setEndereco(c.getEndereco());
-			cliente.setTelefone(c.getTelefone());
-			cliente.setEmail(c.getEmail());
-
-			clientes.add(cliente);
+			clientes.add(ClientesConverter.clienteDtoBuilder(c));
 
 		}
 
@@ -47,70 +38,32 @@ public class ClientesServiceImpl implements ClientesService {
 
 	@Override
 	public ClientesDto buscarPorNome(String nome) {
-		Clientes cliente = repository.findByNome(nome);
 
-		ClientesDto dto = new ClientesDto();
+		Clientes c = repository.findByNome(nome);
 
-		dto.setId(cliente.getId());
-		dto.setNome(cliente.getNome());
-		dto.setEndereco(cliente.getEndereco());
-		dto.setTelefone(cliente.getTelefone());
-		dto.setEmail(cliente.getEmail());
-		dto.setDataNascimento(cliente.getDataNascimento());
-
-		return dto;
+		return ClientesConverter.clienteDtoBuilder(c);
 	}
 
 	@Override
 	public ClientesDto buscaPorDataNascimento(LocalDate data) {
-		
-		Clientes cliente = repository.findByDataNascimento(data);
-	
-		ClientesDto dto = new ClientesDto();
 
-		dto.setId(cliente.getId());
-		dto.setNome(cliente.getNome());
-		dto.setEndereco(cliente.getEndereco());
-		dto.setTelefone(cliente.getTelefone());
-		dto.setEmail(cliente.getEmail());
+		Clientes c = repository.findByDataNascimento(data);
 
-		return dto;
+		return ClientesConverter.clienteDtoBuilder(c);
 	}
 
 	@Override
 	public void inserir(ClientesDto dto) {
-		
-		Clientes cliente = new Clientes();
-		
-		cliente.setNome(dto.getNome());
-		cliente.setEndereco(dto.getEndereco());
-		cliente.setTelefone(dto.getTelefone());
-		cliente.setEmail(dto.getEmail());
-		cliente.setDataNascimento(dto.getDataNascimento());
-		cliente.setCadastro(LocalDate.now());
-		
-		repository.save(cliente);
-		
+
+		repository.save(ClientesConverter.clienteBuilder(dto));
+
 	}
 
 	@Override
 	public void deletar(int id) {
-		
-		repository.deleteById(id);
-		
-	}
 
-	@Override
-	public ReembCalendPgtoDto buscaCalendario(LocalDate data) {
-		
-		ReembCalendPgto calendario = repository.findByDatProcessamento(data);
-		
-		ReembCalendPgtoDto dto = new ReembCalendPgtoDto();
-		
-		dto.setCodReemCalenPgt(calendario.getCodReemCalenPgt());
-		dto.setNmeLogin(calendario.getNmeLogin());
-		
-		return dto;
+		repository.deleteById(id);
+
 	}
 
 }

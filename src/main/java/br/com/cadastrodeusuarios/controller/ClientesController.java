@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
-import br.com.cadastrodeusuarios.domain.dto.ReembCalendPgtoDto;
 import br.com.cadastrodeusuarios.service.ClientesService;
 import lombok.RequiredArgsConstructor;
 
@@ -57,18 +56,9 @@ public class ClientesController {
 
 	@DeleteMapping("/{id}")
 	void deletar(@PathVariable int id) {
-		
+
 		service.deletar(id);
-	
+
 	}
 	
-	
-	@GetMapping("/dataProcess/{data}")
-	ReembCalendPgtoDto buscarPorDataProcess(@PathVariable @DateTimeFormat(pattern = "ddMMyyyy") LocalDate data) {
-
-		ReembCalendPgtoDto calendario = service.buscaCalendario(data);
-
-		return calendario;
-	}
-
 }
