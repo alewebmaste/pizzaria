@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
+import br.com.cadastrodeusuarios.domain.dto.ReembCalendPgtoDto;
 
 public interface ClientesService {
 
@@ -16,5 +17,7 @@ public interface ClientesService {
 	void inserir(ClientesDto dto);
 	
 	void deletar(int id);
+	
+	ReembCalendPgtoDto buscaCalendario(LocalDate data);
 	
 }

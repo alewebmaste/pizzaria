@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
+import br.com.cadastrodeusuarios.domain.dto.ReembCalendPgtoDto;
 import br.com.cadastrodeusuarios.domain.entity.Clientes;
+import br.com.cadastrodeusuarios.domain.entity.ReembCalendPgto;
 import br.com.cadastrodeusuarios.repository.ClientesRepository;
 import br.com.cadastrodeusuarios.service.ClientesService;
 import lombok.RequiredArgsConstructor;
@@ -96,6 +98,19 @@ public class ClientesServiceImpl implements ClientesService {
 		
 		repository.deleteById(id);
 		
+	}
+
+	@Override
+	public ReembCalendPgtoDto buscaCalendario(LocalDate data) {
+		
+		ReembCalendPgto calendario = repository.findByDatProcessamento(data);
+		
+		ReembCalendPgtoDto dto = new ReembCalendPgtoDto();
+		
+		dto.setCodReemCalenPgt(calendario.getCodReemCalenPgt());
+		dto.setNmeLogin(calendario.getNmeLogin());
+		
+		return dto;
 	}
 
 }
