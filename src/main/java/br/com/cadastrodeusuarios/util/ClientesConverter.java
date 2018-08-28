@@ -20,7 +20,8 @@ public class ClientesConverter {
 	}
 	
 	public static Clientes clienteBuilder(ClientesDto dto) {
-		return Clientes.builder()
+		
+		return Clientes.builder().id(dto.getId())
 				.nome(dto.getNome())
 				.endereco(dto.getEndereco())
 				.telefone(dto.getTelefone())

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
 import br.com.cadastrodeusuarios.domain.entity.Clientes;
+import br.com.cadastrodeusuarios.domain.exception.ClienteNaoEncontradoException;
 import br.com.cadastrodeusuarios.repository.ClientesRepository;
 import br.com.cadastrodeusuarios.service.ClientesService;
 import br.com.cadastrodeusuarios.util.ClientesConverter;
@@ -41,6 +42,10 @@ public class ClientesServiceImpl implements ClientesService {
 
 		Clientes c = repository.findByNome(nome);
 
+		if (c == null) {
+			throw new ClienteNaoEncontradoException("O cliente " + nome + " não existe");
+		}
+
 		return ClientesConverter.clienteDtoBuilder(c);
 	}
 
@@ -49,20 +54,33 @@ public class ClientesServiceImpl implements ClientesService {
 
 		Clientes c = repository.findByDataNascimento(data);
 
+		if (c == null) {
+			throw new ClienteNaoEncontradoException("Não existem clientes nascidos em " + data);
+		}
+
 		return ClientesConverter.clienteDtoBuilder(c);
+
 	}
 
 	@Override
 	public void inserir(ClientesDto dto) {
 
-		repository.save(ClientesConverter.clienteBuilder(dto));
+		try {
+			repository.save(ClientesConverter.clienteBuilder(dto));
+		} catch (Exception ex) {
+			throw new IllegalArgumentException(ex.getCause().getCause().getMessage());
+		}
 
 	}
 
 	@Override
 	public void deletar(int id) {
 
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		}catch (Exception e) {
+			throw new ClienteNaoEncontradoException("O cliente número " + id + " não existe");
+		}
 
 	}
 

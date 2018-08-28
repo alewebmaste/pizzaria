@@ -16,5 +16,5 @@ public interface ClientesService {
 	void inserir(ClientesDto dto);
 
 	void deletar(int id);
-	
+
 }

@@ -32,7 +32,7 @@ public class ClientesController {
 	}
 
 	@GetMapping("/{nome}")
-	ClientesDto buscarPorNome(@PathVariable String nome) {
+	ClientesDto buscarPorNome(@PathVariable String nome){
 
 		ClientesDto cliente = service.buscarPorNome(nome);
 

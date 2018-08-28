@@ -18,9 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class ClientesRepositoryImpl implements ClientesRepositoryCustom {
 
 	private final EntityManager em;
-	
+
 	QClientes cliente = QClientes.clientes;
-	
+
 	@Override
 	public Clientes findByNome(String nome) {
 
@@ -33,12 +33,18 @@ public class ClientesRepositoryImpl implements ClientesRepositoryCustom {
 
 	@Override
 	public Clientes findByDataNascimento(LocalDate data) {
-		
+
 		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
-		Clientes c = queryFactory.selectFrom(cliente).where(cliente.dataNascimento.eq(data)).fetchOne();
+		try {
+			Clientes c = queryFactory.selectFrom(cliente).where(cliente.dataNascimento.eq(data)).fetchOne();
+			return c;
+		} catch (Exception ex) {
+			System.out.println("A data é inválida");
+		}
 
-		return c;
+		return null;
+
 	}
 
 }

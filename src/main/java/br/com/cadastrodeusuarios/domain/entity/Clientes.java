@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -18,13 +20,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor 
+@NoArgsConstructor
 public class Clientes {
 
 	@Id
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "nome")
+	@Column(name = "nome_cliente")
 	private String nome;
 
 	@Column(name = "endereco")
