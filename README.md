@@ -1,4 +1,4 @@
-# cadastro-de-usuarios
+# Pizzaria
 
 Crud feito com springboot e jpa.
 
