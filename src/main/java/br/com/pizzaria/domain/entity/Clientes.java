@@ -1,4 +1,4 @@
-package br.com.cadastrodeusuarios.domain.entity;
+package br.com.pizzaria.domain.entity;
 
 import java.time.LocalDate;
 

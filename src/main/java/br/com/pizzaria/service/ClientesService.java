@@ -1,9 +1,9 @@
-package br.com.cadastrodeusuarios.service;
+package br.com.pizzaria.service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
+import br.com.pizzaria.domain.dto.ClientesDto;
 
 public interface ClientesService {
 

@@ -1,9 +1,9 @@
-package br.com.cadastrodeusuarios.util;
+package br.com.pizzaria.util;
 
 import java.time.LocalDate;
 
-import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
-import br.com.cadastrodeusuarios.domain.entity.Clientes;
+import br.com.pizzaria.domain.dto.ClientesDto;
+import br.com.pizzaria.domain.entity.Clientes;
 
 public class ClientesConverter {
 

@@ -1,12 +1,12 @@
-package br.com.cadastrodeusuarios;
+package br.com.pizzaria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CadastroDeUsuariosApplication {
+public class PizzariaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CadastroDeUsuariosApplication.class, args);
+		SpringApplication.run(PizzariaApplication.class, args);
 	}
 }

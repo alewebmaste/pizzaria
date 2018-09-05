@@ -1,4 +1,4 @@
-package br.com.cadastrodeusuarios.service.impl;
+package br.com.pizzaria.service.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
-import br.com.cadastrodeusuarios.domain.entity.Clientes;
-import br.com.cadastrodeusuarios.domain.exception.ClienteNaoEncontradoException;
-import br.com.cadastrodeusuarios.repository.ClientesRepository;
-import br.com.cadastrodeusuarios.service.ClientesService;
-import br.com.cadastrodeusuarios.util.ClientesConverter;
+import br.com.pizzaria.domain.dto.ClientesDto;
+import br.com.pizzaria.domain.entity.Clientes;
+import br.com.pizzaria.domain.exception.ClienteNaoEncontradoException;
+import br.com.pizzaria.repository.ClientesRepository;
+import br.com.pizzaria.service.ClientesService;
+import br.com.pizzaria.util.ClientesConverter;
 import lombok.RequiredArgsConstructor;
 
 @Service

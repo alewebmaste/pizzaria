@@ -1,4 +1,4 @@
-package br.com.cadastrodeusuarios.controller;
+package br.com.pizzaria.controller;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cadastrodeusuarios.domain.dto.ClientesDto;
-import br.com.cadastrodeusuarios.service.ClientesService;
+import br.com.pizzaria.domain.dto.ClientesDto;
+import br.com.pizzaria.service.ClientesService;
 import lombok.RequiredArgsConstructor;
 
 @RestController

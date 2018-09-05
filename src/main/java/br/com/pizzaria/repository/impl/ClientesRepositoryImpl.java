@@ -1,4 +1,4 @@
-package br.com.cadastrodeusuarios.repository.impl;
+package br.com.pizzaria.repository.impl;
 
 import java.time.LocalDate;
 
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import br.com.cadastrodeusuarios.domain.entity.Clientes;
-import br.com.cadastrodeusuarios.domain.entity.QClientes;
-import br.com.cadastrodeusuarios.repository.custom.ClientesRepositoryCustom;
+import br.com.pizzaria.domain.entity.Clientes;
+import br.com.pizzaria.domain.entity.QClientes;
+import br.com.pizzaria.repository.custom.ClientesRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 
 @Repository

@@ -1,8 +1,8 @@
-package br.com.cadastrodeusuarios.repository.custom;
+package br.com.pizzaria.repository.custom;
 
 import java.time.LocalDate;
 
-import br.com.cadastrodeusuarios.domain.entity.Clientes;
+import br.com.pizzaria.domain.entity.Clientes;
 
 public interface ClientesRepositoryCustom {
 
