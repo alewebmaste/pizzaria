@@ -1,6 +1,7 @@
 package br.com.pizzaria.domain.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,5 +23,7 @@ public class ClientesDto {
 	private LocalDate dataNascimento;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate cadastro;
+	
+	private List<PedidosDto> pedidos;
 
 }

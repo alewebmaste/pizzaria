@@ -1,11 +1,13 @@
 package br.com.pizzaria.domain.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -45,5 +47,9 @@ public class Clientes {
 	
 	@Column(name = "cadastro")
 	private LocalDate cadastro;
+	
+	//bi-directional many-to-one association to Pedido
+	@OneToMany(mappedBy="cliente")
+	private List<Pedidos> pedidos;
 
 }

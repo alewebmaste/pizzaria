@@ -1,11 +1,7 @@
 package br.com.pizzaria.controller;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,14 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pizzaria.domain.dto.ClientesDto;
 import br.com.pizzaria.service.ClientesService;
-import br.com.pizzaria.service.GeraRelatorioService;
 import lombok.RequiredArgsConstructor;
-import net.sf.jasperreports.engine.JRException;
 
 @RestController
 @RequestMapping("/clientes")
@@ -29,7 +22,6 @@ import net.sf.jasperreports.engine.JRException;
 public class ClientesController {
 
 	private final ClientesService service;
-	private final GeraRelatorioService geraRelatorioService;
 
 	@GetMapping
 	List<ClientesDto> buscar() {
@@ -67,13 +59,5 @@ public class ClientesController {
 
 		service.deletar(id);
 
-	}
-
-	@GetMapping("/pdf")
-	void imprimeClientes(@RequestParam Map<String, Object> parametros, HttpServletResponse response) throws JRException, IOException {
-		
-		geraRelatorioService.gerarRelatorioClientes(parametros, response);
-
-	}
-
+	}	
 }

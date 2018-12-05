@@ -44,7 +44,7 @@ public class ClientesServiceImpl implements ClientesService {
 
 		if (c == null) {
 			throw new ClienteNaoEncontradoException("O cliente " + nome + " não existe");
-		}
+		}	
 
 		return ClientesConverter.clienteDtoBuilder(c);
 	}
