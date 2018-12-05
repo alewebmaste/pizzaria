@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.pizzaria.domain.dto.ClientesDto;
-import br.com.pizzaria.domain.entity.Clientes;
+import br.com.pizzaria.domain.entity.Cliente;
 import br.com.pizzaria.domain.exception.ClienteNaoEncontradoException;
 import br.com.pizzaria.repository.ClientesRepository;
 import br.com.pizzaria.service.ClientesService;
@@ -23,15 +23,11 @@ public class ClientesServiceImpl implements ClientesService {
 	@Override
 	public List<ClientesDto> buscar() {
 
-		Iterable<Clientes> todosClientes = repository.findAll();
+		Iterable<Cliente> todosClientes = repository.findAll();		
 
 		List<ClientesDto> clientes = new ArrayList<>();
-
-		for (Clientes c : todosClientes) {
-
-			clientes.add(ClientesConverter.clienteDtoBuilder(c));
-
-		}
+		
+		todosClientes.forEach( c -> clientes.add(ClientesConverter.clienteDtoBuilder(c)));
 
 		return clientes;
 
@@ -40,7 +36,7 @@ public class ClientesServiceImpl implements ClientesService {
 	@Override
 	public ClientesDto buscarPorNome(String nome) {
 
-		Clientes c = repository.findByNome(nome);
+		Cliente c = repository.findByNome(nome);
 
 		if (c == null) {
 			throw new ClienteNaoEncontradoException("O cliente " + nome + " não existe");
@@ -52,7 +48,7 @@ public class ClientesServiceImpl implements ClientesService {
 	@Override
 	public ClientesDto buscaPorDataNascimento(LocalDate data) {
 
-		Clientes c = repository.findByDataNascimento(data);
+		Cliente c = repository.findByDataNascimento(data);
 
 		if (c == null) {
 			throw new ClienteNaoEncontradoException("Não existem clientes nascidos em " + data);

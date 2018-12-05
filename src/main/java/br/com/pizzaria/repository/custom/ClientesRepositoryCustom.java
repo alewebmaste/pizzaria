@@ -2,12 +2,12 @@ package br.com.pizzaria.repository.custom;
 
 import java.time.LocalDate;
 
-import br.com.pizzaria.domain.entity.Clientes;
+import br.com.pizzaria.domain.entity.Cliente;
 
 public interface ClientesRepositoryCustom {
 
-	Clientes findByNome(String nome);
+	Cliente findByNome(String nome);
 
-	Clientes findByDataNascimento(LocalDate data);
+	Cliente findByDataNascimento(LocalDate data);
 
 }

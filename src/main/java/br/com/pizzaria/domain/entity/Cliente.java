@@ -18,13 +18,13 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "clientes")
-@NamedQuery(name = "Clientes.findAll", query = "SELECT e FROM Clientes e")
+@NamedQuery(name = "Cliente.findAll", query = "SELECT e FROM Cliente e")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor 
 @NoArgsConstructor
-public class Clientes {
+public class Cliente {
 
 	@Id
 	@Column(name = "id")

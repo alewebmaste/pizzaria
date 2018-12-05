@@ -6,19 +6,21 @@ import java.util.List;
 
 import br.com.pizzaria.domain.dto.ClientesDto;
 import br.com.pizzaria.domain.dto.PedidosDto;
-import br.com.pizzaria.domain.entity.Clientes;
-import br.com.pizzaria.domain.entity.Pedidos;
+import br.com.pizzaria.domain.entity.Cliente;
 
 public class ClientesConverter {
 
-	public static ClientesDto clienteDtoBuilder(Clientes c) {
+	public static ClientesDto clienteDtoBuilder(Cliente c) {
 		
 		List<PedidosDto> pedidosDtoList = new ArrayList<>();
 		
-		for (Pedidos pedidos : c.getPedidos()) {			
-			pedidosDtoList.add(PedidosDto.builder().idPedido(pedidos.getId()).valor(pedidos.getValor()).build());			
-		}
-		
+		c.getPedidos().forEach(p -> pedidosDtoList.add(
+			PedidosDto.builder()
+			.idPedido(p.getId())
+			.valor(p.getValor())
+			.build())
+		);
+				
 		return ClientesDto.builder()
 				.id(c.getId())
 				.nome(c.getNome())
@@ -30,9 +32,10 @@ public class ClientesConverter {
 				.build();
 	}
 	
-	public static Clientes clienteBuilder(ClientesDto dto) {
+	public static Cliente clienteBuilder(ClientesDto dto) {
 		
-		return Clientes.builder().id(dto.getId())
+		return Cliente.builder()
+				.id(dto.getId())
 				.nome(dto.getNome())
 				.endereco(dto.getEndereco())
 				.telefone(dto.getTelefone())
