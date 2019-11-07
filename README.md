@@ -2,6 +2,8 @@
 
 Crud feito com springboot e jpa.
 
+Listagem de clientes paginada usando spring data. 
+
 Querys customizadas utilizando querdsl
 
 Geração de pdf utilizando jasper passando objetos para o jrxml
