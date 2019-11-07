@@ -9,5 +9,7 @@ public interface ClientesRepositoryCustom {
 	Cliente findByNome(String nome);
 
 	Cliente findByDataNascimento(LocalDate data);
+	
+	
 
 }

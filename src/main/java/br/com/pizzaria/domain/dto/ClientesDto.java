@@ -24,6 +24,6 @@ public class ClientesDto {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate cadastro;
 	
-	private List<PedidosDto> pedidos;
+	private List<PedidosDto> pedidos;	
 
 }

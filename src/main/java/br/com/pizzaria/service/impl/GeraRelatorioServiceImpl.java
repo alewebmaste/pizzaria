@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pizzaria.domain.dto.ClientesDto;
+import br.com.pizzaria.domain.dto.RelatorioClientesDto;
 import br.com.pizzaria.service.ClientesService;
 import br.com.pizzaria.service.GeraRelatorioService;
 import lombok.RequiredArgsConstructor;
@@ -52,20 +52,20 @@ public class GeraRelatorioServiceImpl implements GeraRelatorioService {
 		parametros.put("IMG_LOGO", caminhoLogo);
 		parametros.put("IMG_TITULO", caminhoTitulo);*/
 		
-		List<ClientesDto> clientes = service.buscar();
+		//ListRelatorioClientesDto> clientes = service.buscar(null,null,null);
 		
-		JRDataSource dataSource = new JRBeanCollectionDataSource(clientes, false);
+		//JRDataSource dataSource = new JRBeanCollectionDataSource(clientes, false);
 
 		InputStream jasperStream = this.getClass().getResourceAsStream("/relatorios/clientes.jasper");
 
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
+		//JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, dataSource);
 
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment; filename=clientes.pdf");
 
 		final OutputStream outStream = response.getOutputStream();
-		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		//JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 
 	}
 

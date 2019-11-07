@@ -1,12 +1,10 @@
 package br.com.pizzaria.controller;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pizzaria.domain.dto.ClientesDto;
-import br.com.pizzaria.domain.entity.Cliente;
+import br.com.pizzaria.domain.dto.RelatorioClientesDto;
 import br.com.pizzaria.service.ClientesService;
 import lombok.RequiredArgsConstructor;
 
@@ -29,9 +27,17 @@ public class ClientesController {
 	private final ClientesService service;
 
 	@GetMapping
-	List<ClientesDto> buscar() {
+	RelatorioClientesDto buscar(HttpServletRequest httpServletRequest, @RequestParam(defaultValue = "0") Integer pageNo, 
+            				  @RequestParam(defaultValue = "10") Integer pageSize,
+            				  @RequestParam(defaultValue = "id") String sortBy) {		
+		
+		StringBuffer url = httpServletRequest.getRequestURL();
 
-		List<ClientesDto> clientes = service.buscar();
+		RelatorioClientesDto clientes = service.buscar(pageNo, pageSize, sortBy, url);
+		
+		
+		
+		
 
 		return clientes;
 	}
@@ -64,19 +70,6 @@ public class ClientesController {
 
 		service.deletar(id);
 
-	}	
-	
-	
-	
-	@GetMapping("/pag")
-    public ResponseEntity<List<Cliente>> getAllClientesPaginados(
-                        @RequestParam(defaultValue = "0") Integer pageNo, 
-                        @RequestParam(defaultValue = "10") Integer pageSize,
-                        @RequestParam(defaultValue = "id") String sortBy) 
-    {
-        List<Cliente> list = service.getAllClientes(pageNo, pageSize, sortBy);
- 
-        return new ResponseEntity<List<Cliente>>(list, new HttpHeaders(), HttpStatus.OK); 
-    }	
+	}
 	
 }
