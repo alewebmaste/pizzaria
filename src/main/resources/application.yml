@@ -7,10 +7,5 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/pizzaria
     username: root
-    password: paulistano@13
-    driver-class-name: com.mysql.jdbc.Driver
-
-server:
-  servlet:
-    context-path: /api/v1
-  port: 8080
+    password: neto1910
+    driver-class-name: com.mysql.cj.jdbc.Driver

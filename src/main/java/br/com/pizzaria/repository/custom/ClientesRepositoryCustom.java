@@ -1,3 +1,4 @@
+/*
 package br.com.pizzaria.repository.custom;
 
 import java.time.LocalDate;
@@ -13,3 +14,4 @@ public interface ClientesRepositoryCustom {
 	
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package br.com.pizzaria.service;
 
 import java.time.LocalDate;
@@ -18,3 +19,4 @@ public interface ClientesService {
 	void deletar(int id);
 
 }
+*/

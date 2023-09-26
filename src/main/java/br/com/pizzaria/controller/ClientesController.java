@@ -1,75 +1,79 @@
 package br.com.pizzaria.controller;
 
-import java.time.LocalDate;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import br.com.pizzaria.domain.dto.ClientesDto;
-import br.com.pizzaria.domain.dto.RelatorioClientesDto;
-import br.com.pizzaria.service.ClientesService;
-import lombok.RequiredArgsConstructor;
+import br.com.pizzaria.domain.dto.DadosAtualizaCliente;
+import br.com.pizzaria.domain.dto.DadosCliente;
+import br.com.pizzaria.domain.dto.DadosListagemCliente;
+import br.com.pizzaria.domain.entity.Cliente;
+import br.com.pizzaria.repository.ClientesRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/clientes")
-@RequiredArgsConstructor
+@RequestMapping("clientes")
+@SecurityRequirement(name = "bearer-key")
 public class ClientesController {
 
-	private final ClientesService service;
+    @Autowired
+    private ClientesRepository clientesRepository;
 
-	@GetMapping
-	RelatorioClientesDto buscar(HttpServletRequest httpServletRequest, @RequestParam(defaultValue = "0") Integer pageNo, 
-            				  @RequestParam(defaultValue = "10") Integer pageSize,
-            				  @RequestParam(defaultValue = "id") String sortBy) {		
-		
-		StringBuffer url = httpServletRequest.getRequestURL();
+    @GetMapping("listar")
+    public ResponseEntity listar(@PageableDefault(sort = {"nome"}) Pageable paginacao) {
 
-		RelatorioClientesDto clientes = service.buscar(pageNo, pageSize, sortBy, url);
-		
-		
-		
-		
+        var clientes = clientesRepository.findAll(paginacao).map(DadosListagemCliente::new);
+        return ResponseEntity.ok(clientes);
 
-		return clientes;
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCliente dadosCliente, UriComponentsBuilder uriBuilder) {
+
+        var cliente = new Cliente(dadosCliente);
+        clientesRepository.save(cliente);
+        var uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosListagemCliente(cliente));
+
+    }
+
+	@GetMapping("/{id}")
+	public ResponseEntity buscar(@PathVariable Long id) {
+
+        var cliente =  clientesRepository.getReferenceById(id);
+
+		return ResponseEntity.ok(new DadosCliente(cliente));
 	}
 
-	@GetMapping("/{nome}")
-	ClientesDto buscarPorNome(@PathVariable String nome) {
 
-		ClientesDto cliente = service.buscarPorNome(nome);
-
-		return cliente;
-	}
-
-	@GetMapping("/dataNascimento/{data}")
-	ClientesDto buscarPorDataNascimento(@PathVariable @DateTimeFormat(pattern = "ddMMyyyy") LocalDate data) {
-
-		ClientesDto cliente = service.buscaPorDataNascimento(data);
-
-		return cliente;
-	}
 
 	@PutMapping
-	void inserir(@RequestBody ClientesDto dto) {
+    @Transactional
+	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizaCliente dados) {
 
-		service.inserir(dto);
+		var cliente = clientesRepository.getReferenceById(dados.id());
+        cliente.atualizar(dados);
+        return ResponseEntity.ok(new DadosCliente(cliente));
 
 	}
 
 	@DeleteMapping("/{id}")
-	void deletar(@PathVariable int id) {
+    @Transactional
+	public ResponseEntity excluir(@PathVariable Long id) {
 
-		service.deletar(id);
+        var cliente = clientesRepository.findById(id);
+        if (cliente.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        clientesRepository.deleteById(cliente.get().getId());
+		return ResponseEntity.noContent().build();
 
 	}
-	
+
 }

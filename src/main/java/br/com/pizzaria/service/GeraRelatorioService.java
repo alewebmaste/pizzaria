@@ -1,3 +1,4 @@
+/*
 package br.com.pizzaria.service;
 
 import java.io.IOException;
@@ -14,3 +15,4 @@ public interface GeraRelatorioService {
 	void gerarRelatorioClientes(@RequestParam Map<String, Object> parametros, HttpServletResponse response) throws JRException, IOException ;
 
 }
+*/
